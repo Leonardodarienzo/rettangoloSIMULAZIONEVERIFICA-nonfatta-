@@ -10,15 +10,15 @@ def home():
 
 @app.route('/Geometria', methods = ['GET'])
 def geo():
-    geometria = request.args.get("geometria")
+    geometria = request.args.getlist("geometria")
+    print(geometria)
     base = float(request.args.get('base'))
     altezza = float(request.args.get('altezza'))
-    if geometria == "Area":
+    if "Area" in geometria:
         area = base * altezza
-        return render_template('result_2.html',Base = base,Altezza=altezza, Area = area)
-    else:
+    if "Diagonale" in geometria:
         diagonale = math.sqrt(base ** 2 + altezza ** 2)
-        return render_template('result_3.html',Base = base,Altezza=altezza, Diagonale = diagonale)
+    return render_template('result_4.html',Area=area, Diagonale = diagonale)
 
 
 
