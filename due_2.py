@@ -8,14 +8,17 @@ def home():
 
 @app.route('/Area', methods = ['GET'])
 def Arearett():
-    base = float(request.args.get('base'))
-    altezza = float(request.args.get('altezza'))
-    if base > 0 and altezza > 0 :
-        area = base * altezza
-        return render_template('result_2.html',Base = base,Altezza=altezza, Area = area)
+    if request.args.get('base').isdigit() == True and  request.args.get('altezza').isdigit() == True:
+        base = float(request.args.get('base'))
+        altezza = float(request.args.get('altezza'))
+        if base > 0 and altezza > 0 :
+            area = base * altezza
+            return render_template('result_2.html',Base = base,Altezza=altezza, Area = area)
 
+        else:
+            return render_template('errore.html', msg= "dati negativi")
     else:
-        return render_template('errore.html')
+         return render_template('errore.html', msg= "hai inserito una stringa")
 
 
 if __name__ == '__main__':
